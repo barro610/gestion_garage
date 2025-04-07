@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reponse</title>
+</head>
+<body>
+    <h1>Page de Reponse</h1>
+    <form method="POST">
+        <h2>Création de réparation</h2>
+        <label for="date_entree">Date d'entrée :</label>
+        <input type="date" name="date_entree" required><br>
+    
+        <label for="date_sortie_prevue">Date de sortie prévue :</label>
+        <input type="date" name="date_sortie_prevue" required><br>
+    
+        <label for="statut">Statut :</label>
+        <input type="text" name="statut" required><br>
+    
+        <label for="id_vehicule">Véhicules :</label>
+        <select name="id_vehicule" required>
+            {% for vehicule in vehicules %}
+                <option value="{{ vehicule.id_vehicule }}">{{ vehicule.immatriculation }}</option>
+            {% endfor %}
+        </select><br>
+
+        <h2>Sélection de pièce</h2><br>
+        <label for="id_piece">Pièces :</label>
+        <select name="id_piece" required>
+            {% for piece in pieces %}
+                <option value="{{ piece.id_piece }}">{{ piece.nom }} ({{ piece.prix }}) F</option>
+            {% endfor %}
+        </select><br>
+        
+        <h2>Création de l'intervention</h2><br>
+        <label for="description">Description de l'intervention :</label>
+        <textarea name="description" required></textarea><br>
+    
+        <label for="cout">Coût de l'intervention :</label>
+        <input type="number" name="cout" required><br>
+    
+        <label for="duree">Durée de l'intervention (en minutes) :</label>
+        <input type="number" name="duree" required><br>
+
+        <label for="id_mecanicien">Mécaniciens :</label>
+        <select name="id_mecanicien" required>
+            {% for mecanicien in mecaniciens %}
+                <option value="{{ mecanicien.id_mecanicien }}">{{ mecanicien.nom }}</option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Ajouter Réparation</button>
+    </form>
+    
+</body>
+</html>

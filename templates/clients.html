@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <h1>Bienvenue veuillez entrer vos Informations</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <form action="{{ url_for('app.clients') }}" method="POST">
+        <h2>Informations du Client</h2>
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required>
+        
+        <label for="telephone">Téléphone :</label>
+        <input type="text" id="telephone" name="telephone" required>
+        
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="adresse">Adresse :</label>
+        <input type="text" id="adresse" name="adresse">
+        
+        <h2>Informations du Véhicule</h2>
+        <label for="immatriculation">Immatriculation :</label>
+        <input type="text" id="immatriculation" name="immatriculation" required>
+        
+        <label for="marque">Marque :</label>
+        <input type="text" id="marque" name="marque" required>
+        
+        <label for="modele">Modèle :</label>
+        <input type="text" id="modele" name="modele" required>
+        
+        <label for="annee">Année :</label>
+        <input type="number" id="annee" name="annee" required><br><br>
+        
+        <button type="submit">Demader réparation</button>
+    </form>
+
+    <div class="container mt-5">
+        <h1>Réparations des Véhicules</h1>
+        
+        <!-- Tableau des réparations -->
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Véhicule (Immatriculation)</th>
+                    <th>Marque</th>
+                    <th>Modèle</th>
+                    <th>Année</th>
+                    <th>Date Entrée</th>
+                    <th>Date Sortie Prévue</th>
+                    <th>Statut de Réparation</th>
+                    <th>Description Intervention</th>
+                    <th>Cout Intervention</th>
+                    <th>Durée Intervention (minutes)</th>
+                    <th>Mécanicien</th>
+                    <th>Pièce</th>
+                    <th>Prix Pièce</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicule, reparation, intervention, mecanicien, piece in result %}
+                    <tr>
+                        <td>{{ vehicule.immatriculation }}</td>
+                        <td>{{ vehicule.marque }}</td>
+                        <td>{{ vehicule.modele }}</td>
+                        <td>{{ vehicule.annee }}</td>
+                        <td>{{ reparation.date_entree }}</td>
+                        <td>{{ reparation.date_sortie_prevue }}</td>
+                        <td>{{ reparation.statut }}</td>
+                        <td>{{ intervention.description }}</td>
+                        <td>{{ intervention.cout }}</td>
+                        <td>{{ intervention.duree }}</td>
+                        <td>{{ mecanicien.nom }} ({{ mecanicien.specialite }})</td>
+                        <td>{{ piece.nom if piece else 'Aucune' }}</td>
+                        <td>{{ piece.prix if piece else 'Aucun' }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Ajouter Bootstrap JS pour le tableau interactif (si nécessaire) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <a href="{{ url_for('routes.logout') }}" onclick="return confirm('Êtes-vous sûr de vouloir vous déconnecter ?');">Se déconnecter</a>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+</head>
+<body>
+    <h1>Se connecter</h1>
+    <form method="POST" action="{{ url_for('routes.login') }}">
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+        
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+        
+        <button type="submit">Se connecter</button>
+    </form>
+</body>
+</html>

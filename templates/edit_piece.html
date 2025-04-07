@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit_piece</title>
+</head>
+<body>
+    <h1>Modifier la pièce</h1>
+    <form method="POST">
+        <label for="nom">Nom de la pièce</label>
+        <input type="text" id="nom" name="nom" value="{{ piece.nom }}" required>
+        <label for="reference">Référence</label>
+        <input type="text" id="reference" name="reference" value="{{ piece.reference }}" required>
+        <label for="prix">Prix</label>
+        <input type="number" id="prix" name="prix" value="{{ piece.prix }}" required>
+        <label for="stock">Stock</label>
+        <input type="number" id="stock" name="stock" value="{{ piece.stock }}" required>
+        <button type="submit">Mettre à jour</button>
+    </form>
+    <a href="{{ url_for('app.list_pieces') }}">Retour à la liste des pièces</a>
+
+</body>
+</html>

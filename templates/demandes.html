@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Demandes des Clients</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Demandes des Clients</h1>
+
+    {% if clients %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Téléphone</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th>Immatriculation</th>
+                    <th>Marque</th>
+                    <th>Modèle</th>
+                    <th>Année</th>
+                    <th>Réponses</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for client, vehicule in clients %}
+                <tr>
+                    <td>{{ client.nom }}</td>
+                    <td>{{ client.telephone }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.adresse }}</td>
+                    <td>{{ vehicule.immatriculation }}</td>
+                    <td>{{ vehicule.marque }}</td>
+                    <td>{{ vehicule.modele }}</td>
+                    <td>{{ vehicule.annee }}</td>
+                    <td>
+                        <a href="{{ url_for('app.reponse') }}">
+                            <button type="button">Accepter</button>
+                        </a>
+                        <button type="submit" name="action" value="refuse">Refuser</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Aucune demande enregistrée.</p>
+    {% endif %}
+
+</body>
+</html>

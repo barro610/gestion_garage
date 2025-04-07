@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pièces</title>
+</head>
+<body>
+    <h1>Liste des pièces</h1>
+    <a href="{{ url_for('app.add_piece') }}">Ajouter une pièce</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Référence</th>
+                <th>Prix</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for piece in pieces %}
+            <tr>
+                <td>{{ piece.nom }}</td>
+                <td>{{ piece.reference }}</td>
+                <td>{{ piece.prix }}</td>
+                <td>{{ piece.stock }}</td>
+                <td>
+                    <a href="{{ url_for('app.edit_piece', id=piece.id_piece) }}">Modifier</a>
+                    <form action="{{ url_for('app.delete_piece', id=piece.id_piece) }}" method="POST" style="display:inline;">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
